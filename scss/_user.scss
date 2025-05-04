@@ -1,0 +1,16 @@
+// 
+// user.scss
+// Use this to write your custom SCSS
+//
+
+// Responsive font size for agent names
+@media (max-width: 1180px) {
+  .my-responsive-font {
+    font-size: 0.875rem !important;
+  }
+}
+
+.promotions-header > span {
+  overflow: visible !important;
+}
+
