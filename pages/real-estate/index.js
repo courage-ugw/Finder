@@ -586,11 +586,11 @@ const HomePage = () => {
                   defaultValue="Property type"
                   icon="fi-list"
                   options={[
-                    [null, "Houses"],
-                    [null, "Apartments"],
+                    [null, "All Types"],
+                    [null, "Flat/Apartment"],
                     [null, "Commercial"],
-                    [null, "Daily rental"],
-                    [null, "New buildings"],
+                    [null, "House"],
+                    [null, "Land"],
                     [null, "Shortlet"]
                   ]}
                   variant="link ps-2 ps-sm-3"
@@ -602,37 +602,30 @@ const HomePage = () => {
                   defaultValue="Location"
                   icon="fi-map-pin"
                   options={[
-                    [null, "New York"],
-                    [null, "Chicago"],
-                    [null, "Los Angeles"],
-                    [null, "San Diego"]
+                    [null, "Lagos"],
+                    [null, "Abuja"],
+                    [null, "Enugu"],
+                    [null, "Kwara"]
                   ]}
                   variant="link ps-2 ps-sm-3"
                   className="w-sm-50 border-end-sm"
                 />
 
-                <div className="d-flex align-items-center w-100 pt-2 pb-4 py-sm-0 ps-2 ps-sm-3">
-                  <i className="fi-cash fs-lg text-muted me-2"></i>
-                  <span className="text-muted">Price</span>
-                  <ReactSlider
-                    className="range-slider range-slider-single me-0 me-sm-3"
-                    thumbClassName="range-slider-handle"
-                    trackClassName="range-slider-track"
-                    min={0}
-                    max={1000}
-                    defaultValue={450}
-                    ariaLabel={["Handle"]}
-                    ariaValuetext={(state) => `Handle value ${state.valueNow}`}
-                    step={1}
-                    renderThumb={(props, state) => (
-                      <div {...props}>
-                        <div className="range-slider-tooltip">
-                          &#8358; {state.valueNow}
-                        </div>
-                      </div>
-                    )}
-                  />
-                </div>
+                <hr className="d-sm-none my-2" />
+                <DropdownSelect
+                    defaultValue='Price range'
+                    icon='fi-cash'
+                    options={[
+                      ['', '₦10,000 - ₦100,000'],
+                      ['', '₦100,000 - ₦200,000'],
+                      ['', '₦200,000 - ₦300,000'],
+                      ['', '₦300,000 - ₦500,000'],
+                      ['', '₦500,000 - ₦1M'],
+                      ['', '₦1M and above']
+                    ]}
+                    variant="link ps-2 ps-sm-3"
+                    className="w-sm-50 border-end-sm"
+                />
               </Col>
 
               <Col md={1} className="d-sm-flex align-items-center pt-3 pt-md-0">
