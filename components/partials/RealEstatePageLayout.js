@@ -46,18 +46,9 @@ const RealEstatePageLayout = (props) => {
       img: '/images/real-estate/blog/th01.jpg',
       category: 'Home Improvement',
       title: 'Your Guide to a Smart Apartment Searching',
-      text: 'Mi justo, varius vitae cursus ipsum sem massa amet pellentesque. Ipsum enim sit nulla ridiculus semper nam...',
-      date: 'Dec 4',
-      comments: '2'
-    },
-    {
-      href: '/real-estate/blog-single',
-      img: '/images/real-estate/blog/th02.jpg',
-      category: 'Tips & Advice',
-      title: 'Top 10 Ways to Refresh Your Space',
-      text: 'Volutpat, orci, vitae arcu feugiat vestibulum ultricies nisi, aenean eget. Vitae enim, tellus tempor consequat mi vitae...',
-      date: 'Nov 23',
-      comments: 'No'
+      text: 'Finding the perfect apartment can be a daunting task, but with a strategic approach, you can simplify the process and make informed decisions. This guide offers...',
+      date: 'May 5 2025',
+      comments: '1'
     }
   ]
 
@@ -327,20 +318,22 @@ const RealEstatePageLayout = (props) => {
 
                 {/* Logo + contacts */}
                 <div className='mb-sm-0 mb-4 px-2'>
-                  <Link href='/real-estate' className='d-inline-flex mb-4'>
-                    <ImageLoader priority src='/images/logo/logo-dark.svg' width={116} height={32} placeholder={false} alt='Finder' />
+                  <Link href='/real-estate' className='d-inline-flex mb-4' style={{ textDecoration: 'none', fontWeight: 'bold', fontSize: '1.25rem'}}>
+                    {/*<ImageLoader priority src='/images/logo/logo-dark.svg' width={116} height={32} placeholder={false} alt='Finder' />*/}
+                    {/*TODO: replace with logo*/}
+                    HomeFinder
                   </Link>
                   <Nav className='flex-column mb-sm-4 mb-2'>
                     <Nav.Item className='mb-2'>
-                      <Nav.Link href='mailto:example@email.com' active={false} className='p-0 fw-normal'>
+                      <Nav.Link href='enquiries@homefindernigeria.com' active={false} className='p-0 fw-normal'>
                         <i className='fi-mail me-2 align-middle opacity-70'></i>
-                        example@email.com
+                        info@homefindernigeria.com
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                       <Nav.Link href='tel:4065550120' active={false} className='p-0 fw-normal'>
                         <i className='fi-device-mobile me-2 align-middle opacity-70'></i>
-                        (406) 555-0120
+                        +234 706 555 0120
                       </Nav.Link>
                     </Nav.Item>
                   </Nav>
@@ -357,6 +350,9 @@ const RealEstatePageLayout = (props) => {
                   <h4 className='h5'>Quick Links</h4>
                   <Nav className='flex-column'>
                     <Nav.Item className='mb-2'>
+                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Hot deals</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className='mb-2'>
                       <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Buy a property</Nav.Link>
                     </Nav.Item>
                     <Nav.Item className='mb-2'>
@@ -366,13 +362,10 @@ const RealEstatePageLayout = (props) => {
                       <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Rent a property</Nav.Link>
                     </Nav.Item>
                     <Nav.Item className='mb-2'>
+                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Save for your next rent</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className='mb-2'>
                       <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Calculate  your property</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Top offers</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Top cities</Nav.Link>
                     </Nav.Item>
                   </Nav>
                 </div>
@@ -385,16 +378,13 @@ const RealEstatePageLayout = (props) => {
                       <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>About us</Nav.Link>
                     </Nav.Item>
                     <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Our agents</Nav.Link>
+                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Top agents</Nav.Link>
                     </Nav.Item>
                     <Nav.Item className='mb-2'>
                       <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Help &amp; support</Nav.Link>
                     </Nav.Item>
                     <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Contacts</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>News</Nav.Link>
+                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Contact Us</Nav.Link>
                     </Nav.Item>
                   </Nav>
                 </div>
@@ -446,7 +436,7 @@ const RealEstatePageLayout = (props) => {
               <div className='align-self-center d-flex flex-lg-row flex-column align-items-lg-center pt-md-3 pt-5 ps-xxl-4 text-md-start text-center'>
                 <div className='me-md-5'>
                   <h4 className='text-light'>Download Our App</h4>
-                  <p className='mb-lg-0 text-light'>Find everything you need for buying, selling &amp; renting property in our new Finder App!</p>
+                  <p className='mb-lg-0 text-light'>Now finding everything you need from buying, selling &amp; renting property just got even easier with our new app!</p>
                 </div>
                 <div className='flex-shrink-0'>
                   <MarketButton href='#' market='apple' className='mx-2 ms-sm-0 me-sm-4 mb-3' />
@@ -458,7 +448,7 @@ const RealEstatePageLayout = (props) => {
 
           {/* Copyright */}
           <div className='text-center fs-sm pt-4 mt-3 pb-2'>
-            &copy; All rights reserved. Made by <a href='https://createx.studio/' className='d-inline-block nav-link p-0' target='_blank' rel='noreferrer'>Createx Studio</a>
+            &copy;2025 HomeFinder Nigeria. All rights reserved.
           </div>
         </Container>
       </footer>
