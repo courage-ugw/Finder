@@ -7,25 +7,17 @@ import dynamic from "next/dynamic";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Nav from "react-bootstrap/Nav";
 import Modal from "react-bootstrap/Modal";
 import CloseButton from "react-bootstrap/CloseButton";
 import Form from "react-bootstrap/Form";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
-import ProgressBar from "react-bootstrap/ProgressBar";
 import ImageLoader from "../../components/ImageLoader";
 import FormGroup from "../../components/FormGroup";
 import DropdownSelect from "../../components/DropdownSelect";
-import IconBox from "../../components/IconBox";
 import PropertyCard from "../../components/PropertyCard";
-import PropertyCardOverlay from "../../components/PropertyCardOverlay";
-import CardImageHoverOverlay from "../../components/CardImageHoverOverlay";
-import ImageSwap from "../../components/ImageSwap";
-import ReactSlider from "react-slider";
 import {Navigation, Pagination} from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
@@ -34,128 +26,14 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import InputGroup from "react-bootstrap/InputGroup";
 import VenueCardOverlay from "../../components/VenueCardOverlay";
-import MarketButton from "../../components/MarketButton";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const BgParallax = dynamic(() => import("../../components/BgParallax"), {
   ssr: false
 });
 
 const HomePage = () => {
-
-  //TODO: Fix this - Places to eat (restaurants) array
-  const restaurants1 = [
-    {
-      href: '/city-guide/single',
-      imgSrc: '/images/real-estate/agents/01.jpg',
-      imgSize: [100, 100],
-      imgAlt: 'Estate agent',
-      title: 'Miracle Josiah',
-      rating: [5.0, 48],
-      price: 'HomeFinder Nigeria',
-      location: '+234 7512234554',
-      social_media: ['instagram','miraclejosiah']
-    },
-    {
-      href: '/city-guide/single',
-      imgSrc: '/images/real-estate/agents/02.jpg',
-      imgSize: [100, 100],
-      imgAlt: 'Brand logo',
-      title: 'Emmanuel Udom',
-      rating: [4.0, 19],
-      price: 'PekaProperties',
-      location: '+234 7019234554',
-      social_media: ['tiktok','emmanueludom']
-    },
-    {
-      href: '/city-guide/single',
-      imgSrc: '/images/real-estate/agents/03.jpg',
-      imgSize: [100, 100],
-      imgAlt: 'Brand logo',
-      title: 'Femi Gbadamosi',
-      rating: [4.6, 63],
-      price: 'femRealEstate',
-      location: '+234 6514534554',
-      social_media: ['facebook','femigbadamosi']
-    }
-  ]
-  const restaurants2 = [
-    {
-      href: '/city-guide/single',
-      imgSrc: '/images/real-estate/agents/03.jpg',
-      imgSize: [100, 100],
-      imgAlt: 'Estate agent',
-      title: 'Rotimi Douglas',
-      rating: [4.6, 63],
-      price: 'ArikFanProperties',
-      location: '+234 8514534554',
-      social_media: ['facebook','femigbadamosi']
-    },
-    {
-      href: '/city-guide/single',
-      imgSrc: '/images/real-estate/agents/01.jpg',
-      imgSize: [100, 100],
-      imgAlt: 'Estate agent',
-      title: 'Confidence Okereke',
-      rating: [4.0, 19],
-      price: 'Oasis Properties',
-      location: '+234 5019234554',
-      social_media: ['instagram','oasisproperties']
-    },
-    {
-      href: '/city-guide/single',
-      imgSrc: '/images/real-estate/agents/01.jpg',
-      imgSize: [100, 100],
-      imgAlt: 'Estate agent',
-      title: 'Aisha Ibrahim',
-      rating: [5.0, 48],
-      price: 'SleekProperties Nigeria',
-      location: '+234 7512234554',
-      social_media: ['instagram','aishaibrahim']
-    }
-  ]
-
-  // Datepicker state
-  const [startDate, setStartDate] = useState(null)
-
-  // Price range slider
-  const PriceRange = () => {
-    const [minPrice, setMinPrice] = useState(5000);
-    const [maxPrice, setMaxPrice] = useState(14000);
-
-    const handleSliderChange = (sliderVal) => {
-      let sliderMinVal = sliderVal[0];
-      let sliderMaxVal = sliderVal[1];
-      setMinPrice(sliderMinVal);
-      setMaxPrice(sliderMaxVal);
-    };
-
-    return (
-      <ReactSlider
-        className="range-slider range-slider-light"
-        thumbClassName="range-slider-handle"
-        trackClassName="range-slider-track"
-        min={1000}
-        max={20000}
-        value={[minPrice, maxPrice]}
-        ariaLabel={["Lower handle", "Upper handle"]}
-        ariaValuetext={(state) => `Handle value ${state.valueNow}`}
-        step={500}
-        renderThumb={(props, state) => (
-          <div {...props}>
-            <div className="range-slider-tooltip">$ {state.valueNow}</div>
-          </div>
-        )}
-        pearling
-        minDistance={1000}
-        onChange={handleSliderChange}
-      />
-    );
-  };
-
-  // Property cost calculator modal
-  const [modalShow, setModalShow] = useState(false);
-  const handleModalClose = () => setModalShow(false);
-  const handleModalShow = () => setModalShow(true);
 
   // Form validation
   const [validated, setValidated] = useState(false);
@@ -168,6 +46,45 @@ const HomePage = () => {
     setValidated(true);
   };
 
+  // Recently added properties array
+  const recentProperties = [
+    {
+      href: "/real-estate/single-v2",
+      img: "/images/real-estate/recent/04.jpg",
+      category: "For sale",
+      title: "Duplex with Garage",
+      location: "28 Jackson Ave Long Island City, NY 67234",
+      amenities: [4, 2, 2, 126],
+      description:
+          "Blandit lorem dictum in velit. Et nisi at faucibus mauris pretium enim. Risus sapien nisi aliquam egestas leo dignissim ut quis ac. Amet, cras orci justo, tortor nisl aliquet.",
+      button: "Sale for $160,000",
+      badges: [
+        ["info", "New"],
+        ["success", "Verified"]
+      ]
+    },
+    {
+      href: "/real-estate/single-v2",
+      img: "/images/real-estate/recent/05.jpg",
+      category: "For rent",
+      title: "Luxury Rental Villa",
+      location: "1510 Castle Hill Ave Bronx, NY 10462",
+      amenities: [5, 3, 1, 140],
+      description:
+          "Sagittis faucibus feugiat integer quam vel ornare. Tellus, vel consequat, sagittis ut penatibus urna, ante. Mattis fermentum lectus sed nisl ac viverra lacus. A at iaculis etiam nunc, diam urna in.",
+      button: "Rent from $2,850",
+      badges: [
+        ["info", "New"],
+        ["success", "Verified"]
+      ]
+    }
+  ];
+
+  // Property cost calculator modal
+  const [modalShow, setModalShow] = useState(false);
+  const handleModalClose = () => setModalShow(false);
+  const handleModalShow = () => setModalShow(true);
+
   // Number of rooms radios buttons (Cost calculator modal)
   const [roomsValue, setRoomsValue] = useState("3");
   const rooms = [
@@ -176,59 +93,6 @@ const HomePage = () => {
     { name: "5", value: "5" },
     { name: "8", value: "8" },
     { name: "10+", value: "10+" }
-  ];
-
-  // Categories array
-  const categories = [
-    [
-      {
-        href: "/real-estate/catalog?category=rent",
-        media: "fi-real-estate-house",
-        title: "Houses"
-      },
-      {
-        href: "/real-estate/catalog?category=sale",
-        media: "fi-apartment",
-        title: "Apartments"
-      },
-      {
-        href: "/real-estate/catalog?category=rent",
-        media: "fi-shop",
-        title: "Commercial"
-      },
-      {
-        href: "/real-estate/catalog?category=rent",
-        media: "fi-rent",
-        title: "Daily rental"
-      },
-      {
-        href: "/real-estate/catalog?category=sale",
-        media: "fi-house-chosen",
-        title: "New buildings"
-      }
-    ],
-    [
-      {
-        href: "/real-estate/catalog?category=rent",
-        media: "fi-single-bed",
-        title: "Room"
-      },
-      {
-        href: "/real-estate/catalog?category=sale",
-        media: "fi-computer",
-        title: "Office"
-      },
-      {
-        href: "/real-estate/catalog?category=rent",
-        media: "fi-real-estate-buy",
-        title: "Land"
-      },
-      {
-        href: "/real-estate/catalog?category=sale",
-        media: "fi-parking",
-        title: "Parking lot"
-      }
-    ]
   ];
 
   // Properties (Top offers) array
@@ -323,107 +187,8 @@ const HomePage = () => {
     }
   ];
 
-  // properties.title keywords array
+  // properties.title keyword array
   const propertyTitleKeywords = ['house', 'apartment', 'flat', 'duplex', 'terrace', 'bedroom'];
-
-  // Cities array
-  const cities = [
-    {
-      href: "/real-estate/catalog?category=sale",
-      img: "/images/real-estate/city/new-york.jpg",
-      city: "New York",
-      forSale: [893, 20],
-      forRent: [3756, 80]
-    },
-    {
-      href: "/real-estate/catalog?category=rent",
-      img: "/images/real-estate/city/chicago.jpg",
-      city: "Chicago",
-      forSale: [268, 15],
-      forRent: [1540, 85]
-    },
-    {
-      href: "/real-estate/catalog?category=sale",
-      img: "/images/real-estate/city/los-angeles.jpg",
-      city: "Los Angeles",
-      forSale: [2750, 80],
-      forRent: [692, 20]
-    },
-    {
-      href: "/real-estate/catalog?category=rent",
-      img: "/images/real-estate/city/san-diego.jpg",
-      city: "San Diego",
-      forSale: [1739, 48],
-      forRent: [1854, 52]
-    },
-    {
-      href: "/real-estate/catalog?category=sale",
-      img: "/images/real-estate/city/dallas.jpg",
-      city: "Dallas",
-      forSale: [2567, 68],
-      forRent: [1204, 32]
-    }
-  ];
-
-  // Partners (brands) array
-  const partners = [
-    {
-      href: "#",
-      img: [
-        "/images/real-estate/brands/01_gray.svg",
-        "/images/real-estate/brands/01_color.svg"
-      ]
-    },
-    {
-      href: "#",
-      img: [
-        "/images/real-estate/brands/02_gray.svg",
-        "/images/real-estate/brands/02_color.svg"
-      ]
-    },
-    {
-      href: "#",
-      img: [
-        "/images/real-estate/brands/03_gray.svg",
-        "/images/real-estate/brands/03_color.svg"
-      ]
-    },
-    {
-      href: "#",
-      img: [
-        "/images/real-estate/brands/04_gray.svg",
-        "/images/real-estate/brands/04_color.svg"
-      ]
-    },
-    {
-      href: "#",
-      img: [
-        "/images/real-estate/brands/05_gray.svg",
-        "/images/real-estate/brands/05_color.svg"
-      ]
-    },
-    {
-      href: "#",
-      img: [
-        "/images/real-estate/brands/04_gray.svg",
-        "/images/real-estate/brands/04_color.svg"
-      ]
-    },
-    {
-      href: "#",
-      img: [
-        "/images/real-estate/brands/05_gray.svg",
-        "/images/real-estate/brands/05_color.svg"
-      ]
-    },
-    {
-      href: "#",
-      img: [
-        "/images/real-estate/brands/06_gray.svg",
-        "/images/real-estate/brands/06_color.svg"
-      ]
-    }
-  ];
 
   return (
     <RealEstatePageLayout pageTitle="Home v.1" activeNav="Home">
@@ -674,53 +439,96 @@ const HomePage = () => {
         </BgParallax>
       </Container>
 
-      {/* Categories */}
-      <Container as="section" className="mb-5">
-        <Row xs={2} sm={3} lg={6} className="g-3 g-xl-4">
-          {categories[0].map((category, indx) => (
-            <Col key={indx}>
-              <IconBox
-                href={category.href}
-                media={category.media}
-                mediaShape="circle"
-                title={category.title}
-                type="card-shadow"
-                align="center"
-              />
-            </Col>
-          ))}
-          <Col>
-            <Dropdown className="h-100">
-              <Dropdown.Toggle
-                as="div"
-                className="dropdown-toggle-flush h-100 bg-transparent border-0 shadow-none p-0"
-              >
-                <IconBox
-                  media="fi-dots-horisontal"
-                  mediaShape="circle"
-                  title="More"
-                  type="card-shadow"
-                  align="center"
-                />
-              </Dropdown.Toggle>
-              <Dropdown.Menu align={{ sm: "end" }} className="my-2">
-                {categories[1].map((category, indx) => (
-                  <Dropdown.Item
-                    key={indx}
-                    as={Link}
-                    href={category.href}
-                    className="fw-bold"
-                  >
-                    <i
-                      className={`${category.media} fs-base opacity-60 me-2`}
-                    ></i>
-                    {category.title}
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
-            </Dropdown>
-          </Col>
-        </Row>
+      {/* Featured Property Listings (carousel) */}
+      <Container as="section" className="mb-5 pb-md-4">
+        <div className="d-flex align-items-center justify-content-between mb-3">
+          <h2 className="h3 mb-0">Featured Listings</h2>
+          <Button
+              as={Link}
+              href="/real-estate/catalog?category=rent"
+              variant="link fw-normal ms-sm-3 p-0"
+          >
+            View all
+            <i className="fi-arrow-long-right ms-2"></i>
+          </Button>
+        </div>
+
+        {/* Swiper slider */}
+        <div className="position-relative">
+          <Swiper
+              modules={[Navigation, Pagination]}
+              navigation={{
+                prevEl: "#prevProperties",
+                nextEl: "#nextProperties"
+              }}
+              pagination={{
+                el: "#paginationProperties",
+                clickable: true
+              }}
+              loop
+              spaceBetween={8}
+              breakpoints={{
+                0: { slidesPerView: 1 },
+                500: { slidesPerView: 2 },
+                768: { slidesPerView: 3 },
+                992: { slidesPerView: 4 }
+              }}
+              className="pt-3 pb-4 mx-n2"
+          >
+            {properties.map((property, indx) => (
+                <SwiperSlide key={indx} className="h-auto">
+                  <PropertyCard
+                      href={property.href}
+                      images={property.images}
+                      title={property.title}
+                      category={property.category}
+                      location={property.location}
+                      price={property.price}
+                      badges={property.badges}
+                      wishlistButton={{
+                        tooltip: "Add to Wishlist",
+                        props: {
+                          onClick: () =>
+                              console.log("Property added to your Wishlist!")
+                        }
+                      }}
+                      footer={
+                        (property.category.toLowerCase() === 'for rent' || property.category.toLowerCase() === 'for sale')
+                        && propertyTitleKeywords.some(keywordInTitle => property.title.toLowerCase().includes(keywordInTitle))
+                            ? [
+                              ["fi-bed", property.footer[0]],
+                              ["fi-bath", property.footer[1]],
+                              ["fi-toilet", property.footer[2]],
+                              ["fi-car", property.footer[3]]
+                            ]
+                            : [
+                              ["fi-dice", property.coveredArea],
+                              ["fi-resize", property.totalArea],
+                            ]}
+                      className="h-100 mx-2"
+                  />
+                </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* External Prev/Next buttons */}
+          <Button
+              id="prevProperties"
+              variant="prev"
+              className="d-none d-xxl-block mt-n5 ms-n5"
+          />
+          <Button
+              id="nextProperties"
+              variant="next"
+              className="d-none d-xxl-block mt-n5 me-n5"
+          />
+        </div>
+
+        {/* External pagination (bullets) buttons */}
+        <div
+            id="paginationProperties"
+            className="swiper-pagination position-relative bottom-0 py-2 mt-1"
+        ></div>
       </Container>
 
       {/* Hot Deals and Promotion (slider) */}
@@ -858,14 +666,14 @@ const HomePage = () => {
         <div id='bullets' className='swiper-pagination position-relative bottom-0 pt-2 mt-4 mb-lg-3'></div>
       </Container>
 
-      {/* Featured Property Listings (carousel) */}
-      <Container as="section" className="mb-5 pb-md-4">
-        <div className="d-flex align-items-center justify-content-between mb-3">
-          <h2 className="h3 mb-0">Featured Listings</h2>
+      {/* Recently listed properties (carousel) */}
+      <Container as="section" className="mt-n3 mt-md-0 mb-5 pb-2 pb-lg-4">
+        <div className="d-flex align-items-end justify-content-between pb-2">
+          <h2 className="h3 mb-0">Newly listed properties</h2>
           <Button
-            as={Link}
-            href="/real-estate/catalog?category=rent"
-            variant="link fw-normal ms-sm-3 p-0"
+              as={Link}
+              href="/real-estate/catalog?category=sale"
+              variant="link fw-normal ms-2 p-0"
           >
             View all
             <i className="fi-arrow-long-right ms-2"></i>
@@ -873,229 +681,90 @@ const HomePage = () => {
         </div>
 
         {/* Swiper slider */}
-        <div className="position-relative">
-          <Swiper
-            modules={[Navigation, Pagination]}
+        <Swiper
+            modules={[Navigation]}
             navigation={{
-              prevEl: "#prevProperties",
-              nextEl: "#nextProperties"
-            }}
-            pagination={{
-              el: "#paginationProperties",
-              clickable: true
+              prevEl: "#prevProprty",
+              nextEl: "#nextProprty"
             }}
             loop
-            spaceBetween={8}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              500: { slidesPerView: 2 },
-              768: { slidesPerView: 3 },
-              992: { slidesPerView: 4 }
-            }}
-            className="pt-3 pb-4 mx-n2"
-          >
-            {properties.map((property, indx) => (
-              <SwiperSlide key={indx} className="h-auto">
-                <PropertyCard
-                  href={property.href}
-                  images={property.images}
-                  title={property.title}
-                  category={property.category}
-                  location={property.location}
-                  price={property.price}
-                  badges={property.badges}
-                  wishlistButton={{
-                    tooltip: "Add to Wishlist",
-                    props: {
-                      onClick: () =>
-                        console.log("Property added to your Wishlist!")
-                    }
-                  }}
-                  footer={
-                  (property.category.toLowerCase() === 'for rent' || property.category.toLowerCase() === 'for sale')
-                  && propertyTitleKeywords.some(keywordInTitle => property.title.toLowerCase().includes(keywordInTitle))
-                      ? [
-                        ["fi-bed", property.footer[0]],
-                        ["fi-bath", property.footer[1]],
-                        ["fi-toilet", property.footer[2]],
-                        ["fi-car", property.footer[3]]
-                      ]
-                      : [
-                        ["fi-dice", property.coveredArea],
-                        ["fi-resize", property.totalArea],
-                      ]}
-                  className="h-100 mx-2"
-                />
+            autoHeight
+            slidesPerView={1}
+        >
+          {recentProperties.map((property, indx) => (
+              <SwiperSlide key={indx} className="p-2 bg-light py-4">
+                <Row>
+                  <Col md={7} lg={8} className="mb-md-0 mb-3">
+                    <div className="d-flex position-relative pe-lg-5">
+                      <div className="position-absolute top-0 start-0 zindex-1 m-3 p-1">
+                        {property.badges.map((badge, indx) => (
+                            <span
+                                key={indx}
+                                className={`badge bg-${badge[0]} fs-sm me-2`}
+                            >
+                          {badge[1]}
+                        </span>
+                        ))}
+                      </div>
+                      <ImageLoader
+                          src={property.img}
+                          width={808}
+                          height={480}
+                          alt="Image"
+                          className="rounded-3"
+                      />
+                    </div>
+                  </Col>
+                  <Col md={5} lg={4}>
+                  <span className="d-inline-block fs-sm text-uppercase text-primary mb-2 ">
+                    {property.category}
+                  </span>
+                    <div className="">
+                      <h3 className="h4 mb-2">{property.title}</h3>
+                      <p className="mb-md-4 mb-3 fs-sm">{property.location}</p>
+                      <ul className="d-flex mb-md-4 mb-3 list-unstyled">
+                        <li className="me-3 pe-3 border-end">
+                          <b className="me-1">{property.amenities[0]}</b>
+                          <i className="fi-bed mt-n1 lead align-middle text-muted"></i>
+                        </li>
+                        <li className="me-3 pe-3 border-end">
+                          <b className="me-1">{property.amenities[1]}</b>
+                          <i className="fi-bath mt-n1 lead align-middle text-muted"></i>
+                        </li>
+                        <li className="me-3 pe-3 border-end">
+                          <b className="me-1">{property.amenities[2]}</b>
+                          <i className="fi-car mt-n1 lead align-middle text-muted"></i>
+                        </li>
+                        <li>
+                          <b>{property.amenities[3]} </b>sq.m
+                        </li>
+                      </ul>
+                      <p className="mb-4 pb-md-2">{property.description}</p>
+                    </div>
+                    <ButtonGroup size="lg" className="">
+                      <Button as={Link} href={property.href}>
+                        {property.button}
+                      </Button>
+                      <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip>Add to Wishlist</Tooltip>}
+                      >
+                        <Button variant="primary px-3 border-start border-light">
+                          <i className="fi-heart fs-5"></i>
+                        </Button>
+                      </OverlayTrigger>
+                    </ButtonGroup>
+                  </Col>
+                </Row>
               </SwiperSlide>
-            ))}
-          </Swiper>
+          ))}
+        </Swiper>
 
-          {/* External Prev/Next buttons */}
-          <Button
-            id="prevProperties"
-            variant="prev"
-            className="d-none d-xxl-block mt-n5 ms-n5"
-          />
-          <Button
-            id="nextProperties"
-            variant="next"
-            className="d-none d-xxl-block mt-n5 me-n5"
-          />
+        {/* External Prev/Next buttons */}
+        <div className="d-flex pb-1 pb-md-2">
+          <Button id="prevProprty" variant="prev position-relative mx-2" />
+          <Button id="nextProprty" variant="next position-relative mx-2" />
         </div>
-
-        {/* External pagination (bullets) buttons */}
-        <div
-          id="paginationProperties"
-          className="swiper-pagination position-relative bottom-0 py-2 mt-1"
-        ></div>
-      </Container>
-
-      {/* Newly added properties */}
-      <Container as="section" className="pb-4 mb-4">
-        <div className="d-flex align-items-end align-items-lg-center justify-content-between mb-4 pb-md-2">
-          <div className="d-flex w-100 align-items-center justify-content-between justify-content-lg-start">
-            <h2 className="h3 mb-0 me-md-4">Newly Added</h2>
-
-            {/* Dropdown displays on screens < 768px */}
-            <DropdownSelect
-              defaultValue="Houses"
-              options={[
-                [null, "Apartments"],
-                [null, "Houses"],
-                [null, "Lands"],
-                [null, "Commercial"],
-                [null, "Shortlets"]
-              ]}
-              variant="outline-secondary btn-sm"
-              className="d-md-none"
-            />
-
-            {/* Nav tabs display on screens > 768px */}
-            <Nav
-              as="ul"
-              variant="tabs"
-              defaultActiveKey="houses"
-              className="d-none d-md-flex ps-lg-2 mb-0"
-            >
-              <Nav.Item as="li">
-                <Nav.Link eventKey="apartments" className="fs-sm mb-2 mb-md-0">
-                  Apartments
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item as="li">
-                <Nav.Link eventKey="houses" className="fs-sm mb-2 mb-md-0">
-                  Houses
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item as="li">
-                <Nav.Link eventKey="lands" className="fs-sm mb-2 mb-md-0">
-                  Lands
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item as="li">
-                <Nav.Link eventKey="commercial" className="fs-sm mb-2 mb-md-0">
-                  Commercial
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item as="li">
-                <Nav.Link eventKey="shortlets" className="fs-sm mb-2 mb-md-0">
-                  Shortlets
-                </Nav.Link>
-              </Nav.Item>
-            </Nav>
-          </div>
-
-          <Button
-            as={Link}
-            href="/real-estate/catalog?category=rent"
-            variant="link fw-normal d-none d-lg-block p-0"
-          >
-            View all
-            <i className="fi-arrow-long-right ms-2"></i>
-          </Button>
-        </div>
-
-        {/* Grid of properties */}
-        <Row className="g-4">
-          <Col md={6}>
-            <PropertyCardOverlay
-              img={{
-                src: "/images/real-estate/recent/01.jpg",
-                alt: "Background image"
-              }}
-              href="/real-estate/single-v1"
-              title="Luxury 3 bedroom apartment"
-              category="For rent"
-              location="Freedom Way Lekki, Lekki Phase 1, Lekki, Lagos"
-              overlay
-              badges={[
-                ["success", "Premium"],
-                ["info", "New"]
-              ]}
-              button={{
-                href: "/real-estate/single-v1",
-                title: "5,000,000",
-                variant: "primary",
-                wishlistProps: {
-                  onClick: () =>
-                    console.log(
-                      "You've added Luxury Rental Villa property to your wishlist!"
-                    )
-                }
-              }}
-              className="h-100"
-            />
-          </Col>
-          <Col md={6}>
-            <PropertyCardOverlay
-              img={{
-                src: "/images/real-estate/recent/02.jpg",
-                alt: "Background image"
-              }}
-              href="/real-estate/single-v1"
-              title="5 bedroom detached duplex"
-              category="For sale"
-              location="Lekki Right, Lekki Phase 1, Lekki, Lagos"
-              overlay
-              badges={[["info", "New"]]}
-              button={{
-                href: "/real-estate/single-v1",
-                title: "960,000,000",
-                variant: "primary",
-                wishlistProps: {
-                  onClick: () =>
-                    console.log(
-                      "You've added Duplex with Garage property to your wishlist!"
-                    )
-                }
-              }}
-              className="mb-4"
-            />
-            <PropertyCardOverlay
-              img={{
-                src: "/images/real-estate/recent/03.jpg",
-                alt: "Background image"
-              }}
-              href="/real-estate/single-v1"
-              title="Mixed used land"
-              category="For sale"
-              location="Old Ikoyi, Ikoyi, Lagos"
-              overlay
-              badges={[["info", "New"]]}
-              button={{
-                href: "/real-estate/single-v1",
-                title: "3,000,000",
-                variant: "primary",
-                wishlistProps: {
-                  onClick: () =>
-                    console.log(
-                      "You've added Country House property to your wishlist!"
-                    )
-                }
-              }}
-            />
-          </Col>
-        </Row>
       </Container>
 
       {/* Saving towards rent payment or Homeownership */}
@@ -1230,164 +899,74 @@ const HomePage = () => {
         </Row>
       </Container>
 
-      {/* Partners (carousen on screens < 1200px) */}
-      <Container as="section" className="mb-5 pb-2 pb-lg-4">
-        <h2 className="h3 mb-4 text-center text-md-start">Our partners</h2>
-        <Swiper
-          modules={[Pagination]}
-          pagination={{
-            el: "#paginationPartners",
-            clickable: true
-          }}
-          breakpoints={{
-            0: { slidesPerView: 2 },
-            500: { slidesPerView: 4 },
-            992: { slidesPerView: 5, spaceBetween: 16 },
-            1200: { slidesPerView: 6, spaceBetween: 24 }
-          }}
-        >
-          {partners.map((partner, indx) => (
-            <SwiperSlide key={indx}>
-              <ImageSwap
-                href={partner.href}
-                swapFrom={{
-                  imgSrc: partner.img[0],
-                  imgSize: [196, 80],
-                  imgAlt: "Image from"
-                }}
-                swapTo={{
-                  imgSrc: partner.img[1],
-                  imgSize: [196, 80],
-                  imgAlt: "Image to"
-                }}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-
-        {/* External pagination (bullets) buttons */}
-        <div
-          id="paginationPartners"
-          className="swiper-pagination position-relative bottom-0 d-xl-none py-2 mt-2"
-        ></div>
-      </Container>
-
       {/* Agents Banner + Agents */}
-      <Container as='section' className='mb-5 pb-2 pb-lg-4'>
-        <Row>
-
-          {/* Banner */}
-          <Col lg={4} className='text-center text-lg-start mb-lg-0 mb-5'>
-            <a href='#' className='d-block text-decoration-none bg-faded-accent rounded-3 h-100'>
-              <div className='p-4'>
+      <Container as='section' className='pt-4 pb-5 py-sm-5 '>
+          {/* Item */}
+          <div className='card card-body p-sm-5 card-light bg-faded-accent h-100'>
+            <Row className='align-items-center py-3 py-sm-0'>
+              <Col md={6} className='mb-4 pb-3 mb-md-0 pb-md-0 text-center text-md-start'>
                 <h2 className='mb-0 p-2 text-primary text-nowrap'>
                   <i className='fi-users mt-n1 me-2 pe-1 fs-3 align-middle'></i>
-                  Property
+                  Top Property
                   <span className='text-dark'>&nbsp;Agents</span>
                 </h2>
-
-                <p className='mb-0 p-2 fs-lg text-body'>
+                <p className='mb-2 p-2  pb-md-4 fs-lg text-body'>
                   Find the best real estate agents for buying, selling, or renting.
                 </p>
-              </div>
-              <ImageLoader
-                  src='/images/real-estate/illustrations/rent.svg'
-                  width={416}
-                  height={240}
-                  alt='Illustraion'
-              />
-            </a>
-          </Col>
-
-          {/* Where to eat */}
-          <Col lg={8} className='mb-n4 mb-sm-0'>
-            <div className='d-flex align-items-center justify-content-between mb-4 pb-2'>
-              <h2 className='h3 mb-0'>Top Agents</h2>
-              <Button as={Link} href='/city-guide/catalog' variant='link fw-normal p-0'>
-                View all
-                <i className='fi-arrow-long-right ms-2'></i>
-              </Button>
-            </div>
-            <Row>
-              <Col sm={6}>
-                {restaurants1.map((restaurant, indx) => (
-                    <div key={indx} className='d-flex align-items-start position-relative mb-4'>
-                      <ImageLoader
-                          src={restaurant.imgSrc}
-                          width={restaurant.imgSize[0]}
-                          height={restaurant.imgSize[1]}
-                          alt={restaurant.imgAlt}
-                          className='flex-shrink-0 rounded-3'
-                      />
-                      <div className="ps-3">
-                        <h3 className='mb-2 fs-lg my-responsive-font'>
-                          <Link href='/city-guide/single' className='nav-link stretched-link'>{restaurant.title}
-                            <span className='fs-sm' style={{ display: 'inline-block', marginLeft: '0.5em', paddingLeft: '0.5em', borderLeft: '1px solid #ccc' }}>
-                              <i className='fi-star-filled mt-n1 me-1 fs-base text-warning align-middle my-responsive-font'></i>
-                              <b>{restaurant.rating[0]}</b>
-                              <span className='text-muted'>&nbsp;({restaurant.rating[1]})</span>
-                            </span>
-                          </Link>
-                        </h3>
-                        <ul className='list-unstyled mb-0 fs-xs'>
-                          <li>
-                            <i className='fi-real-estate-house mt-n1 me-1 fs-base text-muted align-middle'></i>
-                            {restaurant.price}
-                          </li>
-                          <li>
-                            <i className={'fi-'+ restaurant.social_media[0] + ' mt-n1 me-1 fs-base text-muted align-middle'}></i>
-                            @{restaurant.social_media[1]}
-                          </li>
-                          <li>
-                            <i className='fi-phone mt-n1 me-1 fs-base text-muted align-middle'></i>
-                            {restaurant.location}
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                ))}
+                <Button as={Link} href='/car-finder/sell-car'>
+                  Find Agents
+                  <i className='fi-chevron-right fs-sm ms-2'></i>
+                </Button>
               </Col>
-              <Col sm={6}>
-                {restaurants2.map((restaurant, indx) => (
-                    <div key={indx} className='d-flex align-items-start position-relative mb-4'>
-                      <ImageLoader
-                          src={restaurant.imgSrc}
-                          width={restaurant.imgSize[0]}
-                          height={restaurant.imgSize[1]}
-                          alt={restaurant.imgAlt}
-                          className='flex-shrink-0 rounded-3'
-                      />
-                      <div className="ps-3">
-                        <h3 className='mb-2 fs-lg my-responsive-font'>
-                          <Link href='/city-guide/single' className='nav-link stretched-link'>{restaurant.title}
-                            <span className='fs-sm' style={{ display: 'inline-block', marginLeft: '0.5em', paddingLeft: '0.5em', borderLeft: '1px solid #ccc' }}>
-                              <i className='fi-star-filled mt-n1 me-1 fs-base text-warning align-middle my-responsive-font'></i>
-                              <b>{restaurant.rating[0]}</b>
-                              <span className='text-muted'>&nbsp;({restaurant.rating[1]})</span>
-                            </span>
-                          </Link>
-                        </h3>
-                        <ul className='list-unstyled mb-0 fs-xs'>
-                          <li>
-                            <i className='fi-real-estate-house mt-n1 me-1 fs-base text-muted align-middle'></i>
-                            {restaurant.price}
-                          </li>
-                          <li>
-                            <i className={'fi-'+ restaurant.social_media[0] + ' mt-n1 me-1 fs-base text-muted align-middle'}></i>
-                            @{restaurant.social_media[1]}
-                          </li>
-                          <li>
-                            <i className='fi-phone mt-n1 me-1 fs-base text-muted align-middle'></i>
-                            {restaurant.location}
-                          </li>
-                        </ul>
+              <Col md={6}>
+                <Row className='gy-4 gx-3 gx-sm-4'>
+                  <Col>
+                    <div className='d-table bg-dark rounded-3 p-4 mx-auto mb-3'>
+                      <div className="d-flex p-sm-2">
+                        <ImageLoader
+                            src='/images/car-finder/icons/buyers.svg'
+                            width={56}
+                            height={56}
+                            alt='Icon'
+                            light='true'
+                        />
                       </div>
                     </div>
-                ))}
+                    <div className='fw-bold text-primary text-center'>Vetted Agents</div>
+                  </Col>
+                  <Col>
+                    <div className='d-table bg-dark rounded-3 p-4 mx-auto mb-3'>
+                      <div className="d-flex p-sm-2">
+                        <ImageLoader
+                            src='/images/car-finder/icons/tools.svg'
+                            width={56}
+                            height={56}
+                            alt='Icon'
+                            light='true'
+                        />
+                      </div>
+                    </div>
+                    <div className='fw-bold text-primary text-center'>Proven Track Record </div>
+                  </Col>
+                  <Col>
+                    <div className='d-table bg-dark rounded-3 p-4 mx-auto mb-3'>
+                      <div className="d-flex p-sm-2">
+                        <ImageLoader
+                            src='/images/car-finder/icons/handshake.svg'
+                            width={56}
+                            height={56}
+                            alt='Icon'
+                            light='true'
+                        />
+                      </div>
+                    </div>
+                    <div className='fw-bold text-primary text-center'>Ensures Best Offer</div>
+                  </Col>
+
+                </Row>
               </Col>
             </Row>
-          </Col>
-        </Row>
+          </div>
       </Container>
     </RealEstatePageLayout>
   );
