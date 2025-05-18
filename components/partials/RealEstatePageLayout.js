@@ -15,6 +15,7 @@ import SocialButton from '../SocialButton'
 import MarketButton from '../MarketButton'
 import SignInModalLight from '../partials/SignInModalLight'
 import SignUpModalLight from '../partials/SignUpModalLight'
+import Card from "react-bootstrap/Card";
 
 const RealEstatePageLayout = (props) => {
 
@@ -308,143 +309,86 @@ const RealEstatePageLayout = (props) => {
         {props.children}
       </main>
 
-
       {/* Footer */}
-      <footer className='footer bg-secondary pt-5'>
-        <Container className='pt-lg-4 pb-4'>
-          <Row className='mb-5 pb-md-3 pb-lg-4'>
-            <Col lg={6} className='mb-lg-0 mb-4'>
-              <div className='d-flex flex-sm-row flex-column justify-content-between mx-n2'>
+      <footer className='footer bg-dark pt-5'>
+        <Container className='pb-2'>
+          <Row className='align-items-center pb-4'>
+            <Col md={6} xl={5}>
 
-                {/* Logo + contacts */}
-                <div className='mb-sm-0 mb-4 px-2'>
-                  <Link href='/real-estate' className='d-inline-flex mb-4' style={{ textDecoration: 'none', fontWeight: 'bold', fontSize: '1.25rem'}}>
-                    {/*<ImageLoader priority src='/images/logo/logo-dark.svg' width={116} height={32} placeholder={false} alt='Finder' />*/}
-                    {/*TODO: replace with logo*/}
-                    HomeFinder
-                  </Link>
-                  <Nav className='flex-column mb-sm-4 mb-2'>
-                    <Nav.Item className='mb-2'>
-                      <Nav.Link href='enquiries@homefindernigeria.com' active={false} className='p-0 fw-normal'>
-                        <i className='fi-mail me-2 align-middle opacity-70'></i>
-                        info@homefindernigeria.com
-                      </Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link href='tel:4065550120' active={false} className='p-0 fw-normal'>
-                        <i className='fi-device-mobile me-2 align-middle opacity-70'></i>
-                        +234 706 555 0120
-                      </Nav.Link>
-                    </Nav.Item>
-                  </Nav>
-                  <div className='pt-2'>
-                    <SocialButton href='#' variant='solid' brand='facebook' roundedCircle className='me-2 mb-2' />
-                    <SocialButton href='#' variant='solid' brand='twitter' roundedCircle className='me-2 mb-2' />
-                    <SocialButton href='#' variant='solid' brand='viber' roundedCircle className='me-2 mb-2' />
-                    <SocialButton href='#' variant='solid' brand='telegram' roundedCircle className='mb-2' />
-                  </div>
-                </div>
+              {/* Links */}
+              <Row xs={1} sm={3} className='gy-4'>
+                <Col>
+                  <h3 className='h6 mb-1 pb-1 fs-base text-light'>
+                    <Link href='/real-estate' className=' ' style={{ textDecoration: 'none', fontWeight: 'bold', fontSize: '1.25rem'}}>
+                      HomeFinder
+                    </Link>
+                  </h3>
+                  <ul className='list-unstyled fs-sm'>
+                    <li><Link href='#' className='nav-link-light'>About us</Link></li>
+                    <li><Link href='#' className='nav-link-light'>News</Link></li>
+                    <li><Link href='#' className='nav-link-light'>Contacts</Link></li>
+                  </ul>
+                </Col>
+                <Col>
+                  <h3 className='h6 mb-2 pb-1 fs-base text-light'>Quick Links</h3>
+                  <ul className='list-unstyled fs-sm'>
+                    <li><Link href='#' className='nav-link-light'>Find properties</Link></li>
+                    <li><Link href='#' className='nav-link-light'>Sell properties</Link></li>
+                    <li><Link href='#' className='nav-link-light'>Find Agents</Link></li>
+                  </ul>
+                </Col>
+                <Col>
+                  <h3 className='h6 mb-2 pb-1 fs-base text-light'>Services</h3>
+                  <ul className='list-unstyled fs-sm'>
+                    <li><Link href='#' className='nav-link-light'>Save for next rent</Link></li>
+                    <li><Link href='#' className='nav-link-light'>Property profit potential</Link></li>
+                    <li><Link href='#' className='nav-link-light'>Get Hot Deals</Link></li>
+                  </ul>
+                </Col>
+              </Row>
 
-                {/* Quick links */}
-                <div className='mb-sm-0 mb-4 px-2'>
-                  <h4 className='h5'>Quick Links</h4>
-                  <Nav className='flex-column'>
-                    <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Hot deals</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Buy a property</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Sell a property</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Rent a property</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Save for your next rent</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Calculate  your property</Nav.Link>
-                    </Nav.Item>
-                  </Nav>
-                </div>
-
-                {/* About links */}
-                <div className='px-2'>
-                  <h4 className='h5'>About</h4>
-                  <Nav className='flex-column'>
-                    <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>About us</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Top agents</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Help &amp; support</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item className='mb-2'>
-                      <Nav.Link as={Link} href='#' active={false} className='p-0 fw-normal'>Contact Us</Nav.Link>
-                    </Nav.Item>
-                  </Nav>
-                </div>
+              {/* Socials */}
+              <div className='text-nowrap border-top border-light mt-3 py-4'>
+                <Nav className='mb-sm-4 mb-1 h6 pb-1 fs-base text-light fs-sm'>
+                  <Nav.Item className='mb-2'>
+                    <Nav.Link href='enquiries@homefindernigeria.com' active={false} className='me-5 p-0 fw-normal'>
+                      <i className='fi-mail me-2 align-middle opacity-70'></i>
+                      info@homefindernigeria.com
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link href='tel:4065550120' active={false} className='p-0 fw-normal'>
+                      <i className='fi-device-mobile me-2 align-middle opacity-70'></i>
+                      +234 706 555 0120
+                    </Nav.Link>
+                  </Nav.Item>
+                </Nav>
+                <SocialButton href='#' brand='facebook' variant='translucent' roundedCircle light className='me-2' />
+                <SocialButton href='#' brand='instagram' variant='translucent' roundedCircle light className='me-2' />
+                <SocialButton href='#' brand='tiktok' variant='translucent' roundedCircle light className='me-2' />
+                <SocialButton href='#' brand='whatsapp' variant='translucent' roundedCircle light />
               </div>
             </Col>
-
-            {/* Recent posts */}
-            <Col lg={6} xl={{span: 5, offset: 1}}>
-              <h4 className='h5'>Recent Posts</h4>
-              {footerPosts.map((post, indx) => (
-                <div key={indx}>
-                  <article className='d-flex align-items-start' style={{maxWidth: '640px'}}>
-                    <Link href={post.href} className='d-none d-sm-flex flex-shrink-0 mb-sm-0 mb-3' style={{width: '100px', height: '100px'}}>
-                      <ImageLoader src={post.img} width={200} height={200} className='rounded-3' alt='Thumbnail' />
-                    </Link>
-                    <div className='ps-sm-4'>
-                      <h6 className='mb-1 fs-xs fw-normal text-uppercase text-primary'>{post.category}</h6>
-                      <h5 className='mb-2 fs-base'>
-                        <Link href={post.href} className='nav-link'>{post.title}</Link>
-                      </h5>
-                      <p className='mb-2 fs-sm'>{post.text}</p>
-                      <Link href='#' className='nav-link nav-link-muted d-inline-block me-3 p-0 fs-xs fw-normal'>
-                        <i className='fi-calendar mt-n1 me-1 fs-sm align-middle opacity-70'></i>
-                        {post.date}
-\                      </Link>
-                      <Link href='#' className='nav-link nav-link-muted d-inline-block p-0 fs-xs fw-normal'>
-                        <i className='fi-chat-circle mt-n1 me-1 fs-sm align-middle opacity-70'></i>
-                        {`${post.comments} comments`}
-                      </Link>
+            <Col md={6} xl={{offset: 1}}>
+              <div className='d-flex align-items-center'>
+                <Card className='card-light w-100' style={{maxWidth: '526px'}}>
+                  <Card.Body className='p-4 p-xl-5 my-2 my-md-0'>
+                    <div style={{maxWidth: '380px'}}>
+                      <h3 className='h4 text-light'>Download Our App</h3>
+                      <p className='fs-sm text-light opacity-70 mb-2 mb-lg-3'>Discover everything you need for buying, selling, and renting properties easily with our app!</p>
+                      <div className='d-flex flex-column flex-sm-row ms-n3'>
+                        <MarketButton href='#' market='apple' target='_blank' className='mt-3 ms-3' />
+                        <MarketButton href='#' market='google' target='_blank' className='mt-3 ms-3' />
+                      </div>
                     </div>
-                  </article>
-                  {indx < footerPosts.length - 1 && <hr className='text-dark opacity-10 my-4' />}
+                  </Card.Body>
+                </Card>
+                <div className='d-none d-xl-block ms-n4'>
+                  <ImageLoader priority src='/images/job-board/footer-mobile.svg' width={116} height={233} alt='Mobile app' />
                 </div>
-              ))}
+              </div>
             </Col>
           </Row>
-
-          {/* Mobile app CTA */}
-          <div className='bg-dark rounded-3'>
-            <Col xs={10} md={11} xxl={10} className='d-flex flex-md-row flex-column-reverse align-items-md-end align-items-center mx-auto px-0'>
-              <div className='d-flex flex-shrink-0 mt-md-n5 me-md-5'>
-                <ImageLoader
-                  priority
-                  src='/images/real-estate/illustrations/mobile.svg'
-                  width={240}
-                  height={237}
-                  alt='Illustration' />
-              </div>
-              <div className='align-self-center d-flex flex-lg-row flex-column align-items-lg-center pt-md-3 pt-5 ps-xxl-4 text-md-start text-center'>
-                <div className='me-md-5'>
-                  <h4 className='text-light'>Download Our App</h4>
-                  <p className='mb-lg-0 text-light'>Now finding everything you need from buying, selling &amp; renting property just got even easier with our new app!</p>
-                </div>
-                <div className='flex-shrink-0'>
-                  <MarketButton href='#' market='apple' className='mx-2 ms-sm-0 me-sm-4 mb-3' />
-                  <MarketButton href='#' market='google' className='mb-3' />
-                </div> 
-              </div>
-            </Col>
-          </div>
 
           {/* Copyright */}
           <div className='text-center fs-sm pt-4 mt-3 pb-2'>
