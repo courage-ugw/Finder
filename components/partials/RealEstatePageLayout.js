@@ -40,19 +40,6 @@ const RealEstatePageLayout = (props) => {
     setSignupShow(false)
   }
 
-  // Footer recent blog posts array
-  const footerPosts = [
-    {
-      href: '/real-estate/blog-single',
-      img: '/images/real-estate/blog/th01.jpg',
-      category: 'Home Improvement',
-      title: 'Your Guide to a Smart Apartment Searching',
-      text: 'Finding the perfect apartment can be a daunting task, but with a strategic approach, you can simplify the process and make informed decisions. This guide offers...',
-      date: 'May 5 2025',
-      comments: '1'
-    }
-  ]
-
 
   return (
     <>
