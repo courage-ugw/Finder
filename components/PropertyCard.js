@@ -111,17 +111,18 @@ const PropertyCard = ({
                 : item[1][0] > 1 ? item[1][1] : item[1][2];
             return <OverlayTrigger placement='bottom' overlay={<Tooltip>{toolTipText}</Tooltip>} key={indx}>
                     <span className='d-inline-block me-4 fs-sm'>
-                      {isPropIcon ? item[1].length > 1 &&
-                          <>
-                            <i className={`${item[0]} mx-1 mt-n1 fs-lg text-muted`}></i>
-                            {item[1][1]}
-                          </>
-                       :
-                          item[1].length > 2 &&
-                          <>
-                            {item[1][0]}
-                            <i className={`${item[0]} ms-1 mt-n1 fs-lg text-muted`}></i>
-                          </>
+                      {isPropIcon
+                          ? item[1].length > 1 &&
+                            <>
+                              <i className={`${item[0]} mx-1 mt-n1 fs-lg text-muted`}></i>
+                              {item[1][1]}
+                            </>
+                          :
+                            item[1].length > 2 &&
+                            <>
+                              {item[1][0]}
+                              <i className={`${item[0]} ms-1 mt-n1 fs-lg text-muted`}></i>
+                            </>
                       }
                     </span>
                   </OverlayTrigger>
