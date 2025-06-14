@@ -340,7 +340,7 @@ const HomePage = () => {
                   options={[
                     [null, "Buy"],
                     [null, "Rent"],
-                    [null, "Lease"]
+                    [null, "Shortlet"]
                   ]}
                   variant="link ps-2 ps-sm-3"
                   className="w-sm-50 border-end-sm"
@@ -352,11 +352,11 @@ const HomePage = () => {
                   icon="fi-list"
                   options={[
                     [null, "All Types"],
+                    [null, "Commercial Property"],
                     [null, "Flat/Apartment"],
-                    [null, "Commercial"],
+                    [null, "Event Centre"],
                     [null, "House"],
                     [null, "Land"],
-                    [null, "Shortlet"]
                   ]}
                   variant="link ps-2 ps-sm-3"
                   className="w-sm-50 border-end-md"
